@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrega Donación</title>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+          <p id="bajada">Llena el formulario para mandar tu donación</p>
+        </div>
+        <form class="formulario" action="">
+          <div id="region-input" class="grupo-input">
+            <label for="region">Region</label>
+            <input id="region" name="region" type="text" required>
+          </div>
+          <div id="comuna-input" class="grupo-input">
+            <label for="comuna">Comúna</label>
+            <input id="comuna" name="comuna" type="text" required>
+          </div>
+          <div id="mail-input" class="grupo-input">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div id="nombre-input" class="grupo-input">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" minlength="4" required>
+          </div>
+          <div id="apellido-input" class="grupo-input">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" name="apellido" type="text" maxlength="12" required>
+          </div>
+          <div id="contrasenna-input" class="grupo-input">
+            <label for="contrasenna">Contraseña</label>
+            <input id="contrasenna" name="contrasenna" type="password" required>
+          </div>
+          <div class="botones">
+            <button type="button" id="envio" onclick="validarForm()">
+              Registrarse
+            </button>
+          </div>
+        </form>
+      </div>
+      <script lang="javascript" src="agregar-donacion.js"></script>
+    
+</body>
+</html>
