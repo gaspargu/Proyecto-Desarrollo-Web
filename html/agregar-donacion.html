@@ -13,37 +13,70 @@
         </div>
         <form class="formulario" action="">
           <div id="region-input" class="grupo-input">
-            <label for="region">Region</label>
-            <input id="region" name="region" type="text" required>
+            <label for="region">Región</label>
+            <select id="region" name="region">
+              <option value="">-- Seleccione un Región --</option>
+            </select>
           </div>
           <div id="comuna-input" class="grupo-input">
             <label for="comuna">Comúna</label>
-            <input id="comuna" name="comuna" type="text" required>
+            <select id="comuna" name="comuna">
+              <option value="">-- Seleccione una Comuna --</option>
+            </select>
           </div>
-          <div id="mail-input" class="grupo-input">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required>
+          <div id="calle-numero-input" class="grupo-input">
+            <label for="calle-numero">Calle y número</label>
+            <input id="calle-numero" name="calle-numero" type="text" size="80" required>
+          </div>
+          <div id="tipo-input" class="grupo-input">
+            <label for="tipo">Tipo donación</label>
+            <select id="tipo" name="tipo">
+                <option value="">--Elija un tipo--</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+                <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div id="cantidad-input" class="grupo-input">
+            <label for="cantidad">Cantidad</label>
+            <input id="cantidad" name="cantidad" type="text" size="10" required>
+          </div>
+          <div id="fecha-disponibilidad-input" class="grupo-input">
+            <label for="fecha-disponibilidad">Fecha disponibilidad</label>
+            <input id="fecha-disponibilidad" name="fecha-disponibilidad" type="date" size="10" required>
+          </div>
+          <div id="descripcion-input" class="grupo-input">
+            <label for="descripcion">Descripción</label>
+            <input id="descripcion" name="descripcion" type="text" size="80" required>
+          </div>
+          <div id="condiciones-input" class="grupo-input">
+            <label for="condiciones">Condiciones para retirar</label>
+            <input id="condiciones" name="condiciones" type="text" size="80" required>
+          </div>
+          <div id="calle-numero-input" class="grupo-input">
+            <label for="calle-numero">Foto donación</label>
+            <input id="calle-numero" name="calle-numero" type="file" required>
           </div>
           <div id="nombre-input" class="grupo-input">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" type="text" minlength="4" required>
+            <label for="nombre">Nombre donante</label>
+            <input id="nombre" name="nombre" type="text" minlength="3" maxlength="80" size="80" required>
           </div>
-          <div id="apellido-input" class="grupo-input">
-            <label for="apellido">Apellido</label>
-            <input id="apellido" name="apellido" type="text" maxlength="12" required>
+          <div id="email-input" class="grupo-input">
+            <label for="email">Email contacto</label>
+            <input id="email" name="email" type="email" size="30" required>
           </div>
-          <div id="contrasenna-input" class="grupo-input">
-            <label for="contrasenna">Contraseña</label>
-            <input id="contrasenna" name="contrasenna" type="password" required>
+          <div id="celular-input" class="grupo-input">
+            <label for="celular">Número celular contacto</label>
+            <input id="celular" name="celular" type="tel" size="15"required>
           </div>
           <div class="botones">
             <button type="button" id="envio" onclick="validarForm()">
-              Registrarse
+                Agregar donación
             </button>
           </div>
         </form>
       </div>
-      <script lang="javascript" src="agregar-donacion.js"></script>
+      <script type="module" src="/js/agregar-donacion.js"></script>
     
 </body>
 </html>

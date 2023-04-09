@@ -1,4 +1,4 @@
-{
+export const data = {
     "regiones": [
         {
         "id": 1, "nombre": "Región de Tarapacá",
