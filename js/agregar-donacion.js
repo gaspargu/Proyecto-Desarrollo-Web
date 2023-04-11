@@ -27,8 +27,11 @@ const populateComuna = (event) => {
     comunaInput.options[i].remove();
   }
   let selectedValue = parseInt(event.target.value);
-  let comunas = data_regiones.find(r => r.id === selectedValue).comunas
-  populateSelect(comunaInput,comunas)
+  let region_object = data_regiones.find(r => r.id === selectedValue)
+  if (region_object != undefined) {
+    let comunas = region_object.comunas
+    populateSelect(comunaInput,comunas)
+  }
 }
 
 regionInput.addEventListener('change', populateComuna);
@@ -47,7 +50,7 @@ const validateEmail = (email) => {
 };
 
 const validatePhoneNumber = (phoneNumber) => {
-  if (!phoneNumber) return false;
+  if (!phoneNumber) return true;
   // length validation
   let lengthValid = phoneNumber.length >= 8;
 
@@ -82,8 +85,8 @@ const validateForm = () => {
   // get elements from DOM by using form's name.
   let myForm = document.forms["myForm"];
   let email = myForm["email"].value;
-  let phoneNumber = myForm["phone"].value;
-  let files = myForm["files"].files;
+  let phoneNumber = myForm["celular"].value;
+  let files = myForm["foto"].files;
 
   // validation auxiliary variables and function.
   let invalidInputs = [];
@@ -98,11 +101,13 @@ const validateForm = () => {
     setInvalidInput("Email");
   }
   if (!validatePhoneNumber(phoneNumber)) {
-    setInvalidInput("Phone number");
+    setInvalidInput("Celular");
   }
   if (!validateFiles(files)) {
     setInvalidInput("Picture(s)");
   }
+
+
 
   // finally display validation
   let validationBox = document.getElementById("val-box");
@@ -112,10 +117,10 @@ const validateForm = () => {
   if (!isValid) {
     validationListElem.textContent = "";
     // add invalid elements to val-list element.
-    for (input of invalidInputs) {
+    for (let i = 0; i < invalidInputs.length; i++) {
       let listElement = document.createElement("li");
-      listElement.innerText = input;
-      validationListElem.append(listElement);
+      listElement.innerText = invalidInputs[i];
+      validationListElem.append(listElement)
     }
     // set val-msg
     validationMessageElem.innerText = "Los siguiente campos son invalidos:";
@@ -127,7 +132,8 @@ const validateForm = () => {
   }
 };
 
-let submitBtn = document.getElementById("submit-btn");
+let submitBtn = document.getElementById("envio");
+submitBtn.addEventListener("click", validateForm);
 
 
 

@@ -11,7 +11,7 @@
         <div class="logo">
           <p id="bajada">Llena el formulario para mandar tu donación</p>
         </div>
-        <form class="formulario" action="">
+        <form name="myForm" method="post" enctype="multipart/form-data" class="formulario" action="">
           <div id="region-input" class="grupo-input">
             <label for="region">Región</label>
             <select id="region" name="region">
@@ -53,9 +53,9 @@
             <label for="condiciones">Condiciones para retirar</label>
             <input id="condiciones" name="condiciones" type="text" size="80" required>
           </div>
-          <div id="calle-numero-input" class="grupo-input">
-            <label for="calle-numero">Foto donación</label>
-            <input id="calle-numero" name="calle-numero" type="file" required>
+          <div id="foto-input" class="grupo-input">
+            <label for="foto">Foto donación</label>
+            <input id="foto" name="foto" type="file" required>
           </div>
           <div id="nombre-input" class="grupo-input">
             <label for="nombre">Nombre donante</label>
@@ -70,7 +70,7 @@
             <input id="celular" name="celular" type="tel" size="15"required>
           </div>
           <div class="botones">
-            <button type="button" id="envio" onclick="validarForm()">
+            <button type="button" id="envio">
                 Agregar donación
             </button>
           </div>
