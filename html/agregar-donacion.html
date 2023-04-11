@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="logo">
-          <p id="bajada">Llena el formulario para mandar tu donación</p>
+          <h2 id="bajada">Llena el formulario para mandar tu donación</h2>
         </div>
         <form name="myForm" method="post" enctype="multipart/form-data" class="formulario" action="">
           <div id="region-input" class="grupo-input">
@@ -43,19 +43,19 @@
           </div>
           <div id="fecha-disponibilidad-input" class="grupo-input">
             <label for="fecha-disponibilidad">Fecha disponibilidad</label>
-            <input id="fecha-disponibilidad" name="fecha-disponibilidad" type="date" size="10" required>
+            <input id="fecha-disponibilidad" name="fecha-disponibilidad" type="text" size="10" required>
           </div>
           <div id="descripcion-input" class="grupo-input">
             <label for="descripcion">Descripción</label>
-            <input id="descripcion" name="descripcion" type="text" size="80" required>
+            <input id="descripcion" name="descripcion" type="text" size="80">
           </div>
           <div id="condiciones-input" class="grupo-input">
             <label for="condiciones">Condiciones para retirar</label>
-            <input id="condiciones" name="condiciones" type="text" size="80" required>
+            <input id="condiciones" name="condiciones" type="text" size="80">
           </div>
           <div id="foto-input" class="grupo-input">
             <label for="foto">Foto donación</label>
-            <input id="foto" name="foto" type="file" required>
+            <input id="foto" name="foto" type="file" multiple accept="image/*,.pdf" required>
           </div>
           <div id="nombre-input" class="grupo-input">
             <label for="nombre">Nombre donante</label>
@@ -79,7 +79,10 @@
       <div id="val-box" hidden>
         <h2 id="val-msg"></h2>
         <ul id="val-list"></ul>
-    </div>
+      </div>
+      <div id="confirma-box" hidden>
+        <h2 id="confirma-msg"></h2>
+      </div>
       <script type="module" src="/js/agregar-donacion.js"></script>
     
 </body>

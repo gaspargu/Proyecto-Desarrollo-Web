@@ -5,7 +5,7 @@ let data_regiones = data.regiones
 
 let regionInput = document.getElementById("region")
 let comunaInput = document.getElementById("comuna")
-let callenumeroInput = document.getElementById("calle-numero")
+
 
 
 // function to populate a select input with data in a json 
@@ -36,33 +36,50 @@ const populateComuna = (event) => {
 
 regionInput.addEventListener('change', populateComuna);
 
-const validateEmail = (email) => {
-  if (!email) return false;
-  // length validation
-  let lengthValid = email.length > 15;
+const validateFecha = (fecha) => {
+  if (!fecha) return false;
+  let re = /^((19|20|21|22)\d{2})\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])$/;
+  let formatValid = re.test(fecha);
 
-  // format validation
-  let re = /^[\w.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-  let formatValid = re.test(email);
+  let current_date = new Date();
+  let current_year = current_date.getFullYear();
+  let current_month = current_date.getMonth()+1;
+  let current_day = current_date.getDate();
 
-  // return logic AND of validations.
-  return lengthValid && formatValid;
+  if (formatValid) {
+    let year = parseInt(fecha.substring(0,4))
+    let month = parseInt(fecha.substring(5,7))
+    let day = parseInt(fecha.substring(8,10))
+
+    if (year > current_year) return true;
+    if (year < current_year) return false;
+    if (month > current_month) return true;
+    if (month < current_month) return false;
+    if (day >= current_day) return true;
+    if (day < current_day) return false;
+  }
+
+  return formatValid
+}
+
+const validateSimple = (campo) => {
+  if (!campo) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const validateOpcional = (campo) => true
+
+const validateTipo = (tipo) => {
+  if (!tipo) return false;
+  let optionsValid = (tipo == 'fruta') || (tipo == 'verdura') || (tipo == 'otro');
+
+  return optionsValid;
 };
 
-const validatePhoneNumber = (phoneNumber) => {
-  if (!phoneNumber) return true;
-  // length validation
-  let lengthValid = phoneNumber.length >= 8;
-
-  // format validation
-  let re = /^[0-9]+$/;
-  let formatValid = re.test(phoneNumber);
-
-  // return logic AND of validations.
-  return lengthValid && formatValid;
-};
-
-const validateFiles = (files) => {
+const validateFoto = (files) => {
   if (!files) return false;
 
   // number of files validation
@@ -81,13 +98,59 @@ const validateFiles = (files) => {
   return lengthValid && typeValid;
 };
 
+const validateNombre = (nombre) => {
+  if (!nombre) return false;
+  // length validation
+  let lengthValid = (nombre.length >= 3) && (nombre.length <= 80);
+
+  // return logic AND of validations.
+  return lengthValid;
+};
+
+const validateEmail = (email) => {
+  if (!email) return false;
+  // length validation
+  let lengthValid = email.length > 15;
+
+  // format validation
+  let re = /^[\w.]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  let formatValid = re.test(email);
+
+  // return logic AND of validations.
+  return lengthValid && formatValid;
+};
+
+const validateCelular = (phoneNumber) => {
+  if (!phoneNumber) return true;
+  // length validation
+  let lengthValid = phoneNumber.length >= 8;
+
+  // format validation
+  let re = /^[0-9]+$/;
+  let formatValid = re.test(phoneNumber);
+
+  // return logic AND of validations.
+  return lengthValid && formatValid;
+};
+
+
 const validateForm = () => {
   // get elements from DOM by using form's name.
   let myForm = document.forms["myForm"];
+  let region = myForm["region"].value;
+  let comuna = myForm["comuna"].value;
+  let calle_numero = myForm["calle-numero"].value;
+  let tipo = myForm["tipo"].value;
+  let cantidad = myForm["cantidad"].value;
+  let fecha = myForm["fecha-disponibilidad"].value;
+  let descripcion = myForm["descripcion"].value;
+  let condiciones = myForm["condiciones"].value;
+  let foto = myForm["foto"].files;
+  let nombre = myForm["nombre"].value;
   let email = myForm["email"].value;
-  let phoneNumber = myForm["celular"].value;
-  let files = myForm["foto"].files;
+  let celular = myForm["celular"].value;
 
+  
   // validation auxiliary variables and function.
   let invalidInputs = [];
   let isValid = true;
@@ -97,17 +160,42 @@ const validateForm = () => {
   };
 
   // validation logic
+  if (!validateSimple(region)) {
+    setInvalidInput("Región");
+  }
+  if (!validateSimple(comuna)) {
+    setInvalidInput("Comuna");
+  }
+  if (!validateSimple(calle_numero)) {
+    setInvalidInput("Calle y número");
+  }
+  if (!validateTipo(tipo)) {
+    setInvalidInput("Tipo");
+  }
+  if (!validateSimple(cantidad)) {
+    setInvalidInput("Cantidad");
+  }
+  if (!validateFecha(fecha)) {
+    setInvalidInput("Fecha disponibilidad");
+  }
+  if (!validateOpcional(descripcion)) {
+    setInvalidInput("Descripción");
+  }
+  if (!validateOpcional(condiciones)) {
+    setInvalidInput("Condiciones para retirar");
+  }
+  if (!validateFoto(foto)) {
+    setInvalidInput("Foto donación");
+  }
+  if (!validateNombre(nombre)) {
+    setInvalidInput("Nombre donante");
+  }
   if (!validateEmail(email)) {
     setInvalidInput("Email");
   }
-  if (!validatePhoneNumber(phoneNumber)) {
+  if (!validateCelular(celular)) {
     setInvalidInput("Celular");
   }
-  if (!validateFiles(files)) {
-    setInvalidInput("Picture(s)");
-  }
-
-
 
   // finally display validation
   let validationBox = document.getElementById("val-box");
@@ -123,7 +211,7 @@ const validateForm = () => {
       validationListElem.append(listElement)
     }
     // set val-msg
-    validationMessageElem.innerText = "Los siguiente campos son invalidos:";
+    validationMessageElem.innerText = "Los siguiente campos son inválidos:";
 
     // make validation prompt visible
     validationBox.hidden = false;
