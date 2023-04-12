@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrega Donación</title>
+    <title>Agrega Pedido</title>
     <link rel="stylesheet" href="../css/agregar-pedido.css">
 </head>
 <body>
     <div class="container">
         <div class="logo">
-          <h2 id="bajada">Llena el formulario para mandar tu donación</h2>
+          <h2 id="bajada">Llena el formulario para mandar tu pedido</h2>
         </div>
-        <form name="myForm" method="post" enctype="multipart/form-data" class="formulario" action="">
+        <form name="myForm" method="post" enctype="multipart/form-data" class="formulario">
           <div id="region-input" class="grupo-input">
             <label for="region">Región</label>
             <select id="region" name="region">
@@ -25,12 +25,8 @@
               <option value="">-- Seleccione una Comuna --</option>
             </select>
           </div>
-          <div id="calle-numero-input" class="grupo-input">
-            <label for="calle-numero">Calle y número</label>
-            <input id="calle-numero" name="calle-numero" type="text" size="80" required>
-          </div>
           <div id="tipo-input" class="grupo-input">
-            <label for="tipo">Tipo donación</label>
+            <label for="tipo">Tipo pedido</label>
             <select id="tipo" name="tipo">
                 <option value="">--Elija un tipo--</option>
                 <option value="fruta">Fruta</option>
@@ -38,41 +34,29 @@
                 <option value="otro">Otro</option>
             </select>
           </div>
+          <div id="descripcion-input" class="grupo-input">
+            <label for="descripcion">Descripción pedido</label>
+            <input id="descripcion" name="descripcion" type="text" size="80" required>
+          </div>
           <div id="cantidad-input" class="grupo-input">
             <label for="cantidad">Cantidad</label>
             <input id="cantidad" name="cantidad" type="text" size="10" required>
           </div>
-          <div id="fecha-disponibilidad-input" class="grupo-input">
-            <label for="fecha-disponibilidad">Fecha disponibilidad</label>
-            <input id="fecha-disponibilidad" name="fecha-disponibilidad" type="text" size="10" required>
-          </div>
-          <div id="descripcion-input" class="grupo-input">
-            <label for="descripcion">Descripción</label>
-            <input id="descripcion" name="descripcion" type="text" size="80">
-          </div>
-          <div id="condiciones-input" class="grupo-input">
-            <label for="condiciones">Condiciones para retirar</label>
-            <input id="condiciones" name="condiciones" type="text" size="80">
-          </div>
-          <div id="foto-input" class="grupo-input">
-            <label for="foto">Foto donación</label>
-            <input id="foto" name="foto" type="file" multiple accept="image/*,.pdf" required>
-          </div>
           <div id="nombre-input" class="grupo-input">
-            <label for="nombre">Nombre donante</label>
+            <label for="nombre">Nombre solicitante</label>
             <input id="nombre" name="nombre" type="text" minlength="3" maxlength="80" size="80" required>
           </div>
           <div id="email-input" class="grupo-input">
-            <label for="email">Email contacto</label>
+            <label for="email">Email solicitante</label>
             <input id="email" name="email" type="email" size="30" required>
           </div>
           <div id="celular-input" class="grupo-input">
-            <label for="celular">Número celular contacto</label>
-            <input id="celular" name="celular" type="tel" size="15"required>
+            <label for="celular">Número celular solicitante</label>
+            <input id="celular" name="celular" type="tel" size="15" required>
           </div>
           <div class="botones">
             <button type="button" id="envio">
-                Agregar donación
+                Agregar pedido
             </button>
           </div>
         </form>
@@ -85,8 +69,8 @@
         <h2 id="confirma-msg"></h2>
       </div>
       <div id="Si-box" class="pantalla-nueva" hidden>
-        <h1> Hemos recibido la información de su donación. Muchas gracias!</h1>
-        <a href="inicio.html"><button>Volver al inicio</button></a>
+        <h1> Hemos recibido la información de su pedido. Muchas gracias!</h1>
+        <button class="my-button" onclick="location.href='inicio.html'">Volver al inicio</button>
       </div>
 
       <script type="module" src="/js/agregar-pedido.js"></script>

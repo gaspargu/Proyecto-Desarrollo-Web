@@ -12,7 +12,7 @@
         <div class="logo">
           <h2 id="bajada">Llena el formulario para mandar tu donación</h2>
         </div>
-        <form name="myForm" method="post" enctype="multipart/form-data" class="formulario" action="">
+        <form name="myForm" method="post" enctype="multipart/form-data" class="formulario">
           <div id="region-input" class="grupo-input">
             <label for="region">Región</label>
             <select id="region" name="region">
@@ -68,7 +68,7 @@
           </div>
           <div id="celular-input" class="grupo-input">
             <label for="celular">Número celular contacto</label>
-            <input id="celular" name="celular" type="tel" size="15"required>
+            <input id="celular" name="celular" type="tel" size="15" required>
           </div>
           <div class="botones">
             <button type="button" id="envio">
@@ -86,7 +86,7 @@
       </div>
       <div id="Si-box" class="pantalla-nueva" hidden>
         <h1> Hemos recibido la información de su donación. Muchas gracias!</h1>
-        <a href="inicio.html"><button>Volver al inicio</button></a>
+        <button class="my-button" onclick="location.href='inicio.html'">Volver al inicio</button>
       </div>
 
       <script type="module" src="/js/agregar-donacion.js"></script>

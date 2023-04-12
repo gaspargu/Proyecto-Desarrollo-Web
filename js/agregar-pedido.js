@@ -42,32 +42,6 @@ const populateComuna = (event) => {
 
 regionInput.addEventListener('change', populateComuna);
 
-const validateFecha = (fecha) => {
-  if (!fecha) return false;
-  let re = /^((19|20|21|22)\d{2})\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])$/;
-  let formatValid = re.test(fecha);
-
-  let current_date = new Date();
-  let current_year = current_date.getFullYear();
-  let current_month = current_date.getMonth()+1;
-  let current_day = current_date.getDate();
-
-  if (formatValid) {
-    let year = parseInt(fecha.substring(0,4))
-    let month = parseInt(fecha.substring(5,7))
-    let day = parseInt(fecha.substring(8,10))
-
-    if (year > current_year) return true;
-    if (year < current_year) return false;
-    if (month > current_month) return true;
-    if (month < current_month) return false;
-    if (day >= current_day) return true;
-    if (day < current_day) return false;
-  }
-
-  return formatValid
-}
-
 const validateSimple = (campo) => {
   if (!campo) {
     return false;
@@ -78,30 +52,18 @@ const validateSimple = (campo) => {
 
 const validateOpcional = (campo) => true
 
+const validateDescripcion = (descripcion) => {
+  if (!descripcion) return false;
+  let lengthValid = (descripcion.length >= 3) && (descripcion.length <= 250);
+
+  return lengthValid;
+};
+
 const validateTipo = (tipo) => {
   if (!tipo) return false;
   let optionsValid = (tipo == 'fruta') || (tipo == 'verdura') || (tipo == 'otro');
 
   return optionsValid;
-};
-
-const validateFoto = (files) => {
-  if (!files) return false;
-
-  // number of files validation
-  let lengthValid = 1 <= files.length && files.length <= 3;
-
-  // file type validation
-  let typeValid = true;
-
-  for (const file of files) {
-    // file.type should be "image/<foo>" or "application/pdf"
-    let fileFamily = file.type.split("/")[0];
-    typeValid &&= fileFamily == "image" || file.type == "application/pdf";
-  }
-
-  // return logic AND of validations.
-  return lengthValid && typeValid;
 };
 
 const validateNombre = (nombre) => {
@@ -151,13 +113,9 @@ const validateForm = () => {
   // get elements from DOM by using form's name.
   let region = myForm["region"].value;
   let comuna = myForm["comuna"].value;
-  let calle_numero = myForm["calle-numero"].value;
   let tipo = myForm["tipo"].value;
   let cantidad = myForm["cantidad"].value;
-  let fecha = myForm["fecha-disponibilidad"].value;
   let descripcion = myForm["descripcion"].value;
-  let condiciones = myForm["condiciones"].value;
-  let foto = myForm["foto"].files;
   let nombre = myForm["nombre"].value;
   let email = myForm["email"].value;
   let celular = myForm["celular"].value;
@@ -178,35 +136,23 @@ const validateForm = () => {
   if (!validateSimple(comuna)) {
     setInvalidInput("Comuna");
   }
-  if (!validateSimple(calle_numero)) {
-    setInvalidInput("Calle y número");
-  }
   if (!validateTipo(tipo)) {
     setInvalidInput("Tipo");
   }
   if (!validateSimple(cantidad)) {
     setInvalidInput("Cantidad");
   }
-  if (!validateFecha(fecha)) {
-    setInvalidInput("Fecha disponibilidad");
-  }
-  if (!validateOpcional(descripcion)) {
-    setInvalidInput("Descripción");
-  }
-  if (!validateOpcional(condiciones)) {
-    setInvalidInput("Condiciones para retirar");
-  }
-  if (!validateFoto(foto)) {
-    setInvalidInput("Foto donación");
+  if (!validateDescripcion(descripcion)) {
+    setInvalidInput("Descripción pedido");
   }
   if (!validateNombre(nombre)) {
-    setInvalidInput("Nombre donante");
+    setInvalidInput("Nombre solicitante");
   }
   if (!validateEmail(email)) {
-    setInvalidInput("Email");
+    setInvalidInput("Email solicitante");
   }
   if (!validateCelular(celular)) {
-    setInvalidInput("Celular");
+    setInvalidInput("Celular solicitante");
   }
 
   // finally display validation
