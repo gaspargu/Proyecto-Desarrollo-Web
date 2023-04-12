@@ -6,6 +6,12 @@ let data_regiones = data.regiones
 let regionInput = document.getElementById("region")
 let comunaInput = document.getElementById("comuna")
 
+let myForm = document.forms["myForm"];
+
+let confirmationBox = document.getElementById("confirma-box");
+let confirmationMessageElem = document.getElementById("confirma-msg");
+
+let submitBtn = document.getElementById("envio");
 
 
 // function to populate a select input with data in a json 
@@ -133,10 +139,16 @@ const validateCelular = (phoneNumber) => {
   return lengthValid && formatValid;
 };
 
+const modifyForm = () => {
+  if (typeof(confirmationBox.buttonNo) != 'undefined' && confirmationBox.buttonNo != null) {
+    buttonNo.remove()
+    buttonSi.remove()
+  }
+}
+
 
 const validateForm = () => {
   // get elements from DOM by using form's name.
-  let myForm = document.forms["myForm"];
   let region = myForm["region"].value;
   let comuna = myForm["comuna"].value;
   let calle_numero = myForm["calle-numero"].value;
@@ -202,6 +214,8 @@ const validateForm = () => {
   let validationMessageElem = document.getElementById("val-msg");
   let validationListElem = document.getElementById("val-list");
 
+  let regresaBox = document.getElementById("Si-box");
+
   if (!isValid) {
     validationListElem.textContent = "";
     // add invalid elements to val-list element.
@@ -216,12 +230,48 @@ const validateForm = () => {
     // make validation prompt visible
     validationBox.hidden = false;
   } else {
-    myForm.submit();
+    confirmationMessageElem.innerText = "¿Confirma que desea agregar esta donación?";
+    if (!document.getElementById('si-confirma')) {
+      const buttonSi = document.createElement('button');
+      buttonSi.setAttribute('type', 'button');
+      buttonSi.setAttribute('id', 'si-confirma');
+      buttonSi.textContent = 'Sí, confirmo';
+
+      const buttonNo = document.createElement('button');
+      buttonNo.setAttribute('type', 'button');
+      buttonNo.setAttribute('id', 'no-confirma');
+      buttonNo.textContent = 'No, quiero volver al formulario';
+
+      confirmationBox.appendChild(buttonSi);
+      confirmationBox.appendChild(buttonNo);
+
+      confirmationBox.hidden = false;
+      validationBox.hidden = true;
+
+      buttonSi.addEventListener("click", () => {
+        submitBtn.hidden = false
+        buttonSi.remove()
+        buttonNo.remove()
+        regresaBox.hidden = false;
+      });
+      buttonNo.addEventListener("click", () => {
+        submitBtn.hidden = false
+        buttonSi.remove()
+        buttonNo.remove()
+        validationBox.hidden = true
+        confirmationBox.hidden = true
+      } );
+    }
+
   }
 };
 
-let submitBtn = document.getElementById("envio");
-submitBtn.addEventListener("click", validateForm);
+
+submitBtn.addEventListener('click', validateForm);
+myForm.addEventListener('change', modifyForm);
+
+
+
 
 
 
